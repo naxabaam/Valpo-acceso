@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Acceso</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 50% 20%,#20283b,#0b0e15 65%);color:#fff}.panel{width:min(90vw,360px);padding:40px 30px;text-align:center;border:1px solid #30384c;background:#171c29;border-radius:20px;box-shadow:0 25px 70px #0006}button{width:100%;border:0;border-radius:11px;background:#6574ec;color:white;padding:15px 18px;font-size:16px;font-weight:650;cursor:pointer}button:hover{background:#7785ff}button:focus-visible{outline:3px solid white;outline-offset:3px}#status{margin:15px 0 0;color:#b7c4dd;font-size:13px;min-height:18px}
+</style>
+</head>
+<body>
+<main class="panel"><button id="login" type="button">Iniciar sesión</button><p id="status" role="status" aria-live="polite"></p></main>
+<script>
+const codigo = `import matplotlib.pyplot as plt
+
+dias = [1, 2, 3, 4, 5, 6, 7]
+temperaturas = [22, 25, 24, 28, 26, 30, 27]
+
+plt.plot(dias, temperaturas,
+         color='blue',
+         marker='o',
+         linestyle='--',
+         linewidth=2,
+         markersize=8,
+         label='Temperatura')
+
+plt.title('Temperaturas de la semana',
+          fontsize=14,
+          fontweight='bold')
+
+plt.xlabel('Días')
+plt.ylabel('Temperatura (°C)')
+
+plt.grid(True, linestyle=':')
+plt.legend()
+
+plt.show()`;
+document.querySelector('#login').addEventListener('click',async()=>{
+ const status=document.querySelector('#status');
+ try {await navigator.clipboard.writeText(codigo);status.textContent='Código copiado. Ya puedes pegarlo en Python.';}
+ catch {status.textContent='El navegador bloqueó la copia. Abre la página con HTTPS y autoriza el portapapeles.';}
+});
+</script>
+</body>
+</html>
